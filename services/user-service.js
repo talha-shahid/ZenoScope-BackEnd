@@ -10,6 +10,11 @@ class UserService {
     const user = await UserModel.create(data);
     return user;
   }
+
+  async showAllUsers() {
+    const users = await UserModel.find();
+    return users;
+  }
 }
 
 module.exports = new UserService();
