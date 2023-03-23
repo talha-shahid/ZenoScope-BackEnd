@@ -11,8 +11,8 @@ class UserService {
     return user;
   }
 
-  async showAllUsers() {
-    const users = await UserModel.find();
+  async showAllUsers(query) {
+    const users = await UserModel.find(query);
     return users;
   }
 }
