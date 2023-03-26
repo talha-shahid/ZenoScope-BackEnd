@@ -11,9 +11,21 @@ class UserService {
     return user;
   }
 
-  async showAllUsers(query) {
-    const users = await UserModel.find(query);
-    return users;
+  async showAllUsers(query, ITEM_PER_PAGE, skip) {
+    const count = await UserModel.countDocuments(query);
+
+    const users = await UserModel.find(query).limit(ITEM_PER_PAGE).skip(skip);
+
+    const pageCount = Math.ceil(count / ITEM_PER_PAGE);
+
+    return {
+      users,
+      Pagination: {
+        count,
+        pageCount,
+        skip,
+      },
+    };
   }
 }
 
